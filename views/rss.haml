@@ -1,0 +1,14 @@
+!!! XML
+%feed{"xmlns" => "http://www.w3.org/2005/Atom"}
+  %title= @feed[:title]
+  %link= @feed[:source_url]
+  %updated= @feed[:updated].rfc3339
+  %id== urn:uuid:#{@feed[:uuid]}
+
+  - @items.each do |item|
+    %entry
+      %title== #{@feed[:title]} for #{item[:updated].strftime('%A, %B %-d, %Y')} (##{item[:offset]})
+      %link{:href => item[:url]}
+      %id== urn:uuid:#{item[:uuid]}
+      %updated= item[:updated].rfc3339
+      %summary Provided by Dailythings

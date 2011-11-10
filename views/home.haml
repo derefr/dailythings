@@ -12,27 +12,41 @@
     - @feeds.each do |feed|
       %tr.feed
         %td
-          %a{:href => feed[:today_url]}
-            == #{feed[:name]} (#{feed[:offset]}) 
+          %a{:href => feed[:url]}
+            == #{feed[:title]} (#{feed[:offset]}) 
         %td.deletelink
           %form{:action => '/remove', :method => 'POST'}
-            %input{:type => 'hidden', :name => 'feed', :value => feed[:id]}
+            %input{:type => 'hidden', :name => 'name', :value => feed[:shortname]}
             %input{:type => 'submit', :value => 'Delete'}
 
     %form#addform{:action => '/add', :method => 'POST'}
-      %label{:for => 'url'} URL
-      %input{:type => 'text', :name => 'url'}
-      
-      %br
-      
-      %label{:for => 'name'} Name
-      %input{:type => 'text', :name => 'name'}
+      %label{:for => 'source'} Source
+      %input{:type => 'text', :name => 'source'}
 
       %br
 
-      %label{:for => 'offset'} Offset
+      %label{:for => 'testtemplate'} Test template
+      %input{:type => 'text', :name => 'testtemplate'}
+
+      %br
+      
+      %label{:for => 'linktemplate'} Link template
+      %input{:type => 'text', :name => 'linktemplate'}
+
+      %br
+      
+      %label{:for => 'offset'} Initial offset
       %input{:type => 'text', :name => 'offset'}
+
+      %br
       
+      %label{:for => 'shortname'} Shortname
+      %input{:type => 'text', :name => 'shortname'}
+      
+      %br
+      
+      %label{:for => 'title'} Display name
+      %input{:type => 'text', :name => 'title'}
       %br
       
       %input{:type => 'submit'}
