@@ -1,0 +1,1 @@
+Artificial RSS feeds for pages whose IDs increment daily

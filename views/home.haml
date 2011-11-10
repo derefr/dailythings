@@ -1,0 +1,38 @@
+!!! 5
+%html
+  %head
+    %title== Dailythings
+    %meta{:charset => 'utf-8'}
+    %link{:href => '/site.css', :rel => 'Stylesheet', :type => 'text/css'}
+    
+  %body
+    %h1 Dailythings
+
+    %table#feedlist
+    - @feeds.each do |feed|
+      %tr.feed
+        %td
+          %a{:href => feed[:today_url]}
+            == #{feed[:name]} (#{feed[:offset]}) 
+        %td.deletelink
+          %form{:action => '/remove', :method => 'POST'}
+            %input{:type => 'hidden', :name => 'feed', :value => feed[:id]}
+            %input{:type => 'submit', :value => 'Delete'}
+
+    %form#addform{:action => '/add', :method => 'POST'}
+      %label{:for => 'url'} URL
+      %input{:type => 'text', :name => 'url'}
+      
+      %br
+      
+      %label{:for => 'name'} Name
+      %input{:type => 'text', :name => 'name'}
+
+      %br
+
+      %label{:for => 'offset'} Offset
+      %input{:type => 'text', :name => 'offset'}
+      
+      %br
+      
+      %input{:type => 'submit'}
